@@ -1,6 +1,6 @@
 name: Create JIRA Project
 
-on: 
+on:
   push:
     branches:
       - main

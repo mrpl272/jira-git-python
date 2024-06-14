@@ -15,7 +15,7 @@ headers = {
 payload = json.dumps({
   "assigneeType": "PROJECT_LEAD",
   "avatarId": 10200,
-  "categoryId": 10120,
+#   "categoryId": 10120,
   "description": "Cloud migration initiative",
 #   "issueSecurityScheme": 10001,
   "key": "EX",

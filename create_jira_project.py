@@ -19,13 +19,13 @@ payload = json.dumps({
   "description": "Cloud migration initiative",
   "issueSecurityScheme": 10001,
   "key": "EX",
-  "leadAccountId": "5b10a0effa615349cb016cd8",
+  "leadAccountId": "712020:d662bf67-24fd-4405-abf5-a3e80dd4be3c",
   "name": "Example",
   "notificationScheme": 10021,
   "permissionScheme": 10011,
   "projectTemplateKey": "com.atlassian.jira-core-project-templates:jira-core-simplified-process-control",
   "projectTypeKey": "business",
-  "url": "http://atlassian.com"
+#   "url": "http://atlassian.com"
 })
 
 response = requests.request(

@@ -1,9 +1,10 @@
 name: Create JIRA Project
 
 on: 
-  push: 
+  push:
     branches:
-      - main  # Or specify the branch you want to trigger the workflow
+      - main
+  repository_dispatch:
 
 jobs:
   create-jira-project:
@@ -15,7 +16,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.x'  # Specify the Python version you need
+        python-version: '3.x'
 
     - name: Install dependencies
       run: |

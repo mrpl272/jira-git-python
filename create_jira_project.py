@@ -3,7 +3,7 @@ import requests
 from requests.auth import HTTPBasicAuth
 import json
 
-url = "https://your-domain.atlassian.net/rest/api/3/project"
+url = "https://mrpl272.atlassian.net/rest/api/3/project"
 
 auth = HTTPBasicAuth(os.getenv("JIRA_USER"), os.getenv("JIRA_API_TOKEN"))
 

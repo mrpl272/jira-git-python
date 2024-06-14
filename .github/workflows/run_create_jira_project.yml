@@ -32,7 +32,7 @@ jobs:
           python create_jira_project.py
         continue-on-error: false
   
- cet project list:
+  get-project-list:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository

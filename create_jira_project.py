@@ -25,7 +25,7 @@ def main():
        auth=auth
     )
 
-    print(json.dumps(response.json(), sort_keys=True, indent=4, separators=(",", ": ")))
+    # print(json.dumps(response.json(), sort_keys=True, indent=4, separators=(",", ": ")))
 
     response = requests.request(
     "POST",
@@ -34,8 +34,9 @@ def main():
     headers=headers,
     auth=auth)
 
-    response_data = json.loads(response.text)
-    print(json.dumps(response_data, sort_keys=True, indent=4, separators=(",", ": ")))
+    # response_data = json.loads(response.text)
+    # print(json.dumps(response_data, sort_keys=True, indent=4, separators=(",", ": ")))
+    print(response.text)
 
     if response.status_code != 201 or response_data.get('errors'):
         sys.exit(1)

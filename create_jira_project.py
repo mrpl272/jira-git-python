@@ -2,44 +2,38 @@ import os
 import requests
 from requests.auth import HTTPBasicAuth
 import json
-import sys  # Import sys module
 
+url = "https://mrpl272.atlassian.net/rest/api/3/project"
 
-def main():
-    url = "https://mrpl272.atlassian.net/rest/api/3/project"
+auth = HTTPBasicAuth(os.getenv("JIRA_USER"), os.getenv("JIRA_API_TOKEN"))
 
-    auth = HTTPBasicAuth(os.getenv("JIRA_USER"), os.getenv("JIRA_API_TOKEN"))
+headers = {
+  "Accept": "application/json",
+  "Content-Type": "application/json"
+}
 
-    headers = {
-      "Accept": "application/json",
-      "Content-Type": "application/json"
-    }
+payload = json.dumps({
+  "assigneeType": "PROJECT_LEAD",
+  "avatarId": 10200,
+#   "categoryId": 10120,
+  "description": "Cloud migration initiative",
+#   "issueSecurityScheme": 10001,
+  "key": "EX678",
+  "leadAccountId": "712020:d662bf67-24fd-4405-abf5-a3e80dd4be3c",
+  "name": "Example786t8",
+#   "notificationScheme": 10021,
+#   "permissionScheme": 10011,
+  "projectTemplateKey": "com.atlassian.jira-core-project-templates:jira-core-simplified-process-control",
+  "projectTypeKey": "business",
+#   "url": "http://atlassian.com"
+})
 
-    with open('payload.json') as f:
-        payload = json.load(f)
+response = requests.request(
+   "POST",
+   url,
+   data=payload,
+   headers=headers,
+   auth=auth
+)
 
-    response = requests.post(
-       url,
-       json=payload,
-       headers=headers,
-       auth=auth
-    )
-
-    # print(json.dumps(response.json(), sort_keys=True, indent=4, separators=(",", ": ")))
-
-    response = requests.request(
-    "POST",
-    url,
-    data=payload,
-    headers=headers,
-    auth=auth)
-
-    # response_data = json.loads(response.text)
-    # print(json.dumps(response_data, sort_keys=True, indent=4, separators=(",", ": ")))
-    print(response.text)
-
-    if response.status_code != 201 or response_data.get('errors'):
-        sys.exit(1)
-
-if __name__ == "__main__":
-    main()
+print(json.dumps(json.loads(response.text), sort_keys=True, indent=4, separators=(",", ": ")))

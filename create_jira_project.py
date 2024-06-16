@@ -2,6 +2,8 @@ import os
 import requests
 from requests.auth import HTTPBasicAuth
 import json
+import sys
+
 
 url = "https://mrpl272.atlassian.net/rest/api/3/project"
 
@@ -37,3 +39,6 @@ response = requests.request(
 )
 
 print(json.dumps(json.loads(response.text), sort_keys=True, indent=4, separators=(",", ": ")))
+
+if response.status_code != 201 or response_data.get('errors'):
+    sys.exit(1)

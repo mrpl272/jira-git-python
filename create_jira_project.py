@@ -2,6 +2,8 @@ import os
 import requests
 from requests.auth import HTTPBasicAuth
 import json
+import sys  # Import sys module
+
 
 def main():
     url = "https://mrpl272.atlassian.net/rest/api/3/project"

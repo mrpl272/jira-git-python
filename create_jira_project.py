@@ -5,7 +5,7 @@ import json
 import sys
 
 
-url = "https://mrpl272.atlassian.net/rest/api/3/project"
+url = "https://mrpl272.atlassian.net/rest/api/3/projec"
 
 auth = HTTPBasicAuth(os.getenv("JIRA_USER"), os.getenv("JIRA_API_TOKEN"))
 

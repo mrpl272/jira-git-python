@@ -19,7 +19,10 @@ def main():
        auth=auth
     )
 
-    print(json.dumps(response.json(), sort_keys=True, indent=4, separators=(",", ": ")))
+    # print(json.dumps(response.json(), sort_keys=True, indent=4, separators=(",", ": ")))
+
+    with open('projects.json', 'w') as f:
+        json.dump(response.json(), f, sort_keys=True, indent=4, separators=(",", ": "))
 
 if __name__ == "__main__":
     main()

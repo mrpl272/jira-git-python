@@ -6,7 +6,7 @@ def main():
         projects = json.load(f)
 
     for project in projects:
-        if project['name'] == 'Example2234':
+        if project['name'] == 'Example2234757y784373':
             print(project['self'])
 
 if __name__ == "__main__":

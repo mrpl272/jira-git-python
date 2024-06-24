@@ -53,5 +53,5 @@ jobs:
           python get_jira_project.py
       
       - name: Find project URL
-      run: |
-        python find_project_url.py  
+        run: |
+          python find_project_url.py  

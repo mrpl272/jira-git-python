@@ -23,11 +23,12 @@ jobs:
           source venv/bin/activate
           pip install requests
           # Keep the environment activated for the next steps
-          echo "source $PWD/venv/bin/activate" >> $GITHUB_ENV
+          echo 'source $PWD/venv/bin/activate' > activate_venv.sh
+          chmod +x activate_venv.sh
 
       - name: Verify virtual environment
         run: |
-          source $GITHUB_ENV
+          ./activate_venv.sh
 
       # - name: Install dependencies
       #   run: |

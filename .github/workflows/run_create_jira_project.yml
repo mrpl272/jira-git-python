@@ -29,6 +29,7 @@ jobs:
       - name: Verify virtual environment
         run: |
           ./activate_venv.sh
+          python check_venv.py
 
       # - name: Install dependencies
       #   run: |

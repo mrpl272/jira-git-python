@@ -1,4 +1,4 @@
-name: Hello World
+name: Conditional Payload
 
 on:
   push:
@@ -9,12 +9,27 @@ on:
       - main
 
 jobs:
-  say-hello:
+  check-payload:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Say Hello
-      run: echo "Hello, World!"
+    - name: Set up payload
+      run: echo "PAYLOAD={\"name\":\"abc\",\"check\":\"yes\"}" >> $GITHUB_ENV
+
+    - name: Parse payload
+      id: parse_payload
+      run: |
+        echo "Check is: $(echo $PAYLOAD | jq -r .check)"
+        echo "::set-output name=check::$(echo $PAYLOAD | jq -r .check)"
+        echo "::set-output name=payload::$(echo $PAYLOAD)"
+
+    - name: Echo payload if check is yes
+      if: steps.parse_payload.outputs.check == 'yes'
+      run: echo ${{ steps.parse_payload.outputs.payload }}
+
+    - name: Echo no payload if check is no
+      if: steps.parse_payload.outputs.check != 'yes'
+      run: echo "no payload"

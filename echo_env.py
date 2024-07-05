@@ -1,6 +1,7 @@
 # echo_env.py
 
 import os
+import subprocess
 
 # Get the environment variable
 name = os.getenv('NAME')

@@ -1,34 +1,27 @@
-name: Conditional Payload
+name: Run Python Script
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
-  check-payload:
+  echo-name:
     runs-on: ubuntu-latest
-
+    env:
+      NAME: "your_environment_variable_value"
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Read payload.json
-      id: read_payload
-      run: |
-        PAYLOAD=$(cat payload.json)
-        echo "PAYLOAD=$PAYLOAD" >> $GITHUB_ENV
-        CHECK=$(echo $PAYLOAD | jq -r .check)
-        echo "::set-output name=check::$CHECK"
-        echo "::set-output name=payload::$PAYLOAD"
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'  # Specify the Python version you need
 
-    - name: Echo payload if check is yes
-      if: steps.read_payload.outputs.check == 'yes'
-      run: echo "${{ steps.read_payload.outputs.payload }}"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
 
-    - name: Echo no payload if check is no
-      if: steps.read_payload.outputs.check != 'yes'
-      run: echo "no payload"
+      - name: Run Python script
+        run: python echo_env.py

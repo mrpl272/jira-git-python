@@ -1,5 +1,8 @@
 name: Run Python Script
 
+env:
+      NAME: "your_environment_variable_value"
+      
 on:
   push:
     branches:
@@ -8,8 +11,7 @@ on:
 jobs:
   echo-name:
     runs-on: ubuntu-latest
-    env:
-      NAME: "your_environment_variable_value"
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2

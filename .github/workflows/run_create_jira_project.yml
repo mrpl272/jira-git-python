@@ -1,4 +1,4 @@
-name: Two-Stage Workflow
+name: Two-Stage Workflow with Artifact
 
 on:
   push:
@@ -12,15 +12,27 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Run first stage script
-        run: echo "Running first stage"
+      - name: Generate output file
+        run: echo "This is a sample output" > output.txt
+
+      - name: Save output as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: output-file
+          path: output.txt
 
   second_stage:
     runs-on: ubuntu-latest
-    needs: first_stage  # This ensures the second stage runs only if the first stage succeeds
+    needs: first_stage
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Run second stage script
-        run: echo "Running second stage"
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: output-file
+          path: ./artifact-output
+
+      - name: Use the output
+        run: cat ./artifact-output/output.txt

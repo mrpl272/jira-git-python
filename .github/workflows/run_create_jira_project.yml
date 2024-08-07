@@ -13,8 +13,7 @@ jobs:
 
       - name: Run a command
         run: |
-          echo "This is job1"
-          # Simulate a failure
+          mayur
 
       - name: Set outcome
         id: check_outcome

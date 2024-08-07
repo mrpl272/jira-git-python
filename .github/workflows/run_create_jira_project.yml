@@ -1,38 +1,27 @@
-name: Two-Stage Workflow with Artifact
+name: Conditional Job Execution
 
-on:
-  push:
-    branches:
-      - main
+on: [push]
 
 jobs:
-  first_stage:
+  job1:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Check out repository
+        uses: actions/checkout@v2
 
-      - name: Generate output file
-        run: echo "This is a sample output" > output.txt
+      - name: Run a command
+        run: |
+          echo "This is job1"
+          # Simulate a failure
+          exit 1
 
-      - name: Save output as artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: output-file
-          path: output.txt
-
-  second_stage:
+  job2:
+    needs: job1
+    if: ${{ needs.job1.result == 'failure' }}
     runs-on: ubuntu-latest
-    needs: first_stage
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Check out repository
+        uses: actions/checkout@v2
 
-      - name: Download artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: output-file
-          path: ./artifact-output
-
-      - name: Use the output
-        run: cat ./artifact-output/output.txt
+      - name: Run a command
+        run: echo "This is job2, running because job1 failed"

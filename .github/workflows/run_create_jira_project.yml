@@ -8,8 +8,8 @@ jobs:
     env:
       mayur: "Hello from mayur"
     steps:
-      - name: Echo the environment variable
-        run: echo "name="The value of mayur is:${{ env.mayur }}"" >> GITHUB_ENV
+      - name: Set a new environment variable from the existing one
+        run: echo "name=The value of mayur is:${{ env.mayur }}" >> $GITHUB_ENV
 
-      - name: echo
+      - name: Echo the new environment variable
         run: echo "${{ env.name }}"

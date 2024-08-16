@@ -1,4 +1,4 @@
-name: Echo Environment Variable
+name: Echo Environment Variable and Store in JSON
 
 on: [push]
 
@@ -9,7 +9,15 @@ jobs:
       mayur: "Hello from mayur"
     steps:
       - name: Set a new environment variable from the existing one
-        run: echo "name=The value of mayur is:${{ env.mayur }}" >> $GITHUB_ENV
+        run: echo "name=The value of mayur is: ${{ env.mayur }}" >> $GITHUB_ENV
 
       - name: Echo the new environment variable
         run: echo "${{ env.name }}"
+
+      - name: Store the output in a JSON variable
+        run: |
+          json_output=$(jq -n --arg name "${{ env.name }}" '{"name": $name}')
+          echo "json_output=$json_output" >> $GITHUB_ENV
+
+      - name: Echo the JSON variable
+        run: echo "${{ env.json_output }}"

@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Run a command to set output
         id: step1
-        run: echo "someValue=Hello from job1" >> $GITHUB_ENV
+        run: echo "someValue=Hello from job1" >> $GITHUB_OUTOUT
         # Or use:
         # echo "::set-output name=someValue::Hello from job1"
 

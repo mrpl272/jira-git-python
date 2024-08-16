@@ -12,4 +12,4 @@ jobs:
         run: echo "name="The value of mayur is:${{ env.mayur }}"" >> GITHUB_ENV
 
       - name: echo
-        run: echo ${{ env.name }}
+        run: echo "${{ env.name }}"

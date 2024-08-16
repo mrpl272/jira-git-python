@@ -19,4 +19,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Use output from job1
-        run: echo "The output from job1 is: ${{ needs.job1.outputs.myOutput }}"
+        run: echo "The output from job1 is ${{ needs.job1.outputs.myOutput }}"

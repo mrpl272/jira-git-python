@@ -13,11 +13,19 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
         run: |
-          branch="mayur223"
-          echo "Branch name: $branch"
-          git checkout -b $branch
-          ls
-          git push origin $branch
+          # branch="mayur223"
+          # echo "Branch name: $branch"
+          # git checkout -b $branch
+          # ls
+          # git push origin $branch
+          TOKEN=${{ env.GITHUB_TOKEN }}
+          Previous_branch_name=main
+          New_branch_name=XYZ
+
+          SHA=$(curl -H "Authorization: token $TOKEN" https://api.github.com/repos/jira-git-python/git/refs/heads/$Previous_branch_name | jq -r '.object.sha')
+
+          curl -X POST -H "Authorization: token $TOKEN" \
+          -d  "{\"ref\": \"refs/heads/$New_branch_name\",\"sha\": \"$SHA\"}"  https://api.github.com/repos/jira-git-python/git/refs
 
       
     

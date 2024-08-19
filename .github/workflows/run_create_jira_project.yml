@@ -1,25 +1,15 @@
-name: Echo Environment Variable and Store in JSON
+name: Echo Branch from JSON
 
 on: [push]
 
 jobs:
-  echo-env-variable:
+  echo-branch:
     runs-on: ubuntu-latest
-    env:
-      mayur: "Hello from mayur"
     steps:
-      - name: Set a new environment variable from the existing one
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Read branch key from JSON
         run: |
-          echo "name=The value of mayur is:${{ env.mayur }}" >> $GITHUB_ENV
-          echo "${{ env.name }}"
-
-      - name: Echo the new environment variable
-        run: echo "${{ env.name }}"
-
-      - name: Store the output in a JSON variable
-        run: |
-          json_output=$(jq -n --arg name "${{ env.name }}" '{"name": $name}')
-          echo "json_output=$json_output" >> $GITHUB_ENV
-
-      - name: Echo the JSON variable
-        run: echo "${{ env.json_output }}"
+          branch=$(python -c "import json; print(json.load(open('file.json'))['branch'])")
+          echo "Branch: $branch"

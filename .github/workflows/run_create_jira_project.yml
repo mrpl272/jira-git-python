@@ -13,8 +13,7 @@ jobs:
         run: |
           branch="mayur223"
           echo "Branch name: $branch"
-      
-      - name: Create and push new branch
-        run: |
           git checkout -b $branch
           git push origin $branch
+      
+    

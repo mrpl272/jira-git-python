@@ -10,22 +10,16 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Read branch key from JSON
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
         run: |
-          # branch="mayur223"
-          # echo "Branch name: $branch"
-          # git checkout -b $branch
-          # ls
-          # git push origin $branch
-          TOKEN=${{ env.GITHUB_TOKEN }}
-          Previous_branch_name=main
-          New_branch_name=XYZ
-
-          SHA=$(curl -H "Authorization: token $TOKEN" https://api.github.com/repos/jira-git-python/git/refs/heads/$Previous_branch_name | jq -r '.object.sha')
-
-          curl -X POST -H "Authorization: token $TOKEN" \
-          -d  "{\"ref\": \"refs/heads/$New_branch_name\",\"sha\": \"$SHA\"}"  https://api.github.com/repos/jira-git-python/git/refs
-
+          branch="mayur223"
+          echo "Branch name: $branch"
       
-    
+      - name: Configure Git for pushing
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      
+      - name: Create and push new branch
+        run: |
+          git checkout -b $branch
+          git push --set-upstream origin $branch

@@ -16,10 +16,14 @@ jobs:
       
       - name: Get and save branch information
         run: |
+          ls
+          rm -r *
+          ls
           branch_name=${GITHUB_REF#refs/heads/}
           timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
           echo "Branch: $branch_name, Run Timestamp: $timestamp" >> branch-log.txt
           cat branch-log.txt
+          
       
       # - name: Create and push new branch
       #   run: |

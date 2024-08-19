@@ -11,5 +11,14 @@ jobs:
 
       - name: Read branch key from JSON
         run: |
-          branch=$(python -c "import json; print(json.load(open('file.json'))['branch'])")
+          branch=$(python -c "
+import json, sys
+try:
+    with open('file.json') as f:
+        data = json.load(f)
+    print(data['branch'])
+except (FileNotFoundError, KeyError) as e:
+    print(f'Error: {e}', file=sys.stderr)
+    sys.exit(1)
+")
           echo "Branch: $branch"

@@ -11,5 +11,10 @@ jobs:
 
       - name: Read branch key from JSON
         run: |
-          mayur="mayur223"
-          echo $mayur
+          branch="mayur223"
+          echo "Branch name: $branch"
+      
+      - name: Create and push new branch
+        run: |
+          git checkout -b $branch
+          git push origin $branch

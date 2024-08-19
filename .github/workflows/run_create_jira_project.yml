@@ -17,7 +17,7 @@ jobs:
           echo "Branch name: $branch"
           git checkout -b $branch
           ls
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} $branch
+          git push origin $branch
 
       
     

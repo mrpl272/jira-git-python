@@ -11,6 +11,5 @@ jobs:
 
       - name: Read branch key from JSON
         run: |
-          cat file.json
-          echo "branch=$(python -c 'import json; f=open("file.json"); data = json.load(f); print(data)')"
-          echo "Branch: $branch"
+          mayur="mayur223"
+          echo $mayur

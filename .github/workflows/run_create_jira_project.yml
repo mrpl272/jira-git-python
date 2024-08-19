@@ -15,7 +15,7 @@ jobs:
           echo "Branch name: $branch
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git checkout -b $branch
-          git push --set-upstream origin $branch
+          # git checkout -b $branch
+          # git push --set-upstream origin $branch
 
          

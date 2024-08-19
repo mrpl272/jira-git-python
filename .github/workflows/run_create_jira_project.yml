@@ -12,10 +12,14 @@ jobs:
       - name: Read branch key from JSON
         run: |
           branch="mayur223"
-          echo "Branch name: $branch
+          echo "Branch name: $branch"
+      
+      - name: Configure Git for pushing
+        run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          # git checkout -b $branch
-          # git push --set-upstream origin $branch
-
-         
+      
+      # - name: Create and push new branch
+      #   run: |
+      #     git checkout -b $branch
+      #     git push --set-upstream origin $branch

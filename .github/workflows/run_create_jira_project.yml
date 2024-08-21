@@ -37,7 +37,6 @@ jobs:
   handle-failure:
     needs: run-python-script
     runs-on: ubuntu-latest
-    if: failure()  # Run this job only if the previous job fails
 
     steps:
       - name: Download output.json artifact

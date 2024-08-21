@@ -1,4 +1,4 @@
-name: Run Python Script and Display JSON
+name: Run Python Script and Handle Failures
 
 on: 
   push:
@@ -22,7 +22,27 @@ jobs:
           python-version: '3.x'
 
       - name: Run fail.py
+        id: run_script
         run: |
-          python fail.py
-          cat output.json
+          python fail.py || echo "Script failed with exit code $?"
 
+      - name: Upload output.json as artifact if script fails
+        if: failure() # This condition runs only if the previous step fails
+        uses: actions/upload-artifact@v3
+        with:
+          name: output-json
+          path: output.json
+
+  handle-failure:
+    needs: run-python-script
+    runs-on: ubuntu-latest
+    if: failure() # This job runs only if the first job fails
+
+    steps:
+      - name: Download output.json artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: output-json
+
+      - name: Echo the contents of output.json
+        run: cat output.json

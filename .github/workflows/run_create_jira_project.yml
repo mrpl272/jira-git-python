@@ -11,7 +11,6 @@ on:
 jobs:
   run-python-script:
     runs-on: ubuntu-latest
-    continue-on-error: true  # Ensure the job continues even if the script fails
 
     steps:
       - name: Checkout code
@@ -25,9 +24,11 @@ jobs:
       - name: Run fail.py
         id: run_script
         run: |
-          python fail.py 
+          python fail.py
+        continue-on-error: true  # Allow the job to proceed even if the script fails
+
       - name: Upload output.json as artifact if script fails
-        if: failure()  # Run this step only if any previous step fails
+        if: always()  # Run this step no matter what
         uses: actions/upload-artifact@v3
         with:
           name: output-json
@@ -36,7 +37,7 @@ jobs:
   handle-failure:
     needs: run-python-script
     runs-on: ubuntu-latest
-    if: failure()  # This job runs only if the previous job fails
+    if: failure()  # Run this job only if the previous job fails
 
     steps:
       - name: Download output.json artifact

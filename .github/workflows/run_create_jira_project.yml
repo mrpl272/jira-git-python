@@ -1,32 +1,15 @@
-name: Echo Branch from JSON
+name: Echo JSON File
 
 on: [push]
 
 jobs:
-  echo-branch:
+  echo-json:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Read branch key from JSON
+      - name: Display contents of file.json
         run: |
-          branch="mayur223"
-          echo "Branch name: $branch"
-      
-      - name: Get and save branch information
-        run: |
-          ls
-          rm -r *
-          echo "removed"
-          ls
-          branch_name=${GITHUB_REF#refs/heads/}
-          timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-          echo "Branch: $branch_name, Run Timestamp: $timestamp" >> branch-log.txt
-          cat branch-log.txt
-          
-      
-      # - name: Create and push new branch
-      #   run: |
-      #     git checkout -b $branch
-      #     git push --set-upstream origin $branch
+          cat file.json
+          echo "::set-output name=json_contents::$(cat file.json)"

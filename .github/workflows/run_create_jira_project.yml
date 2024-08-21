@@ -23,10 +23,11 @@ jobs:
 
       - name: Create Project
         run: |
-          curl --request GET \
+          curl --request POST \
           --url 'https://mrpl272.atlassian.net/rest/api/3/project' \
           --user '${{ secrets.JIRA_USER }}:${{ secrets.JIRA_API_TOKEN}}' \
           --header 'Accept: application/json' \
+          --header 'Content-Type: application/json' \
           --data '{
             "assigneeType": "PROJECT_LEAD",
             "avatarId": 10200,

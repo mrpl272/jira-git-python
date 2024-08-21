@@ -4,7 +4,7 @@ import json
 my_dict = {
     "object1": {"id": 1464, "value": 12435},
     "object2": {"id": 245, "value": 20046},
-    "object3": {"id": 345, "value": 30086},
+    "object3": {"id": 345, "value": 3008566},
     "object4": {"id": 45689, "value": 40078},
     "object5": {"id": 54946, "value": 50464}
 }
